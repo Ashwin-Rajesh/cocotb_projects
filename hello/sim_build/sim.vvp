@@ -1,0 +1,47 @@
+#! /usr/local/bin/vvp
+:ivl_version "12.0 (devel)" "(s20150603-1018-g94b503fc)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision - 12;
+:vpi_module "/usr/local/lib/ivl/system.vpi";
+:vpi_module "/usr/local/lib/ivl/vhdl_sys.vpi";
+:vpi_module "/usr/local/lib/ivl/vhdl_textio.vpi";
+:vpi_module "/usr/local/lib/ivl/v2005_math.vpi";
+:vpi_module "/usr/local/lib/ivl/va_math.vpi";
+:vpi_module "/usr/local/lib/ivl/v2009.vpi";
+S_0x557bfbe82f60 .scope package, "$unit" "$unit" 2 1;
+ .timescale -9 -12;
+S_0x557bfbe70ff0 .scope module, "test" "test" 3 25;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 1 "a";
+    .port_info 1 /INPUT 1 "b";
+    .port_info 2 /INPUT 1 "clk";
+    .port_info 3 /OUTPUT 1 "d";
+o0x7f8d420d7018 .functor BUFZ 1, C4<z>; HiZ drive
+v0x557bfbe827c0_0 .net "a", 0 0, o0x7f8d420d7018;  0 drivers
+o0x7f8d420d7048 .functor BUFZ 1, C4<z>; HiZ drive
+v0x557bfbe830f0_0 .net "b", 0 0, o0x7f8d420d7048;  0 drivers
+o0x7f8d420d7078 .functor BUFZ 1, C4<z>; HiZ drive
+v0x557bfbe82ec0_0 .net "clk", 0 0, o0x7f8d420d7078;  0 drivers
+v0x557bfbeb76e0_0 .var "d", 0 0;
+E_0x557bfbea9090 .event negedge, v0x557bfbe82ec0_0;
+    .scope S_0x557bfbe70ff0;
+T_0 ;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x557bfbeb76e0_0, 0, 1;
+    %end;
+    .thread T_0, $init;
+    .scope S_0x557bfbe70ff0;
+T_1 ;
+    %wait E_0x557bfbea9090;
+    %load/vec4 v0x557bfbe827c0_0;
+    %load/vec4 v0x557bfbe830f0_0;
+    %and;
+    %assign/vec4 v0x557bfbeb76e0_0, 0;
+    %jmp T_1;
+    .thread T_1;
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    "-";
+    "/home/ashwin/Testbox/cocotb/hello_world/module.v";

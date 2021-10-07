@@ -1,0 +1,6 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1633537826" />
+    <testcase classname="tb" file="/home/ashwin/Testbox/cocotb/hello_world/tb.py" lineno="10" name="test_fn" ratio_time="7342.05096306669" sim_time_ns="20.001" time="0.002724170684814453" />
+  </testsuite>
+</testsuites>
