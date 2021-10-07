@@ -1,0 +1,60 @@
+#! /usr/local/bin/vvp
+:ivl_version "12.0 (devel)" "(s20150603-1018-g94b503fc)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision - 12;
+:vpi_module "/usr/local/lib/ivl/system.vpi";
+:vpi_module "/usr/local/lib/ivl/vhdl_sys.vpi";
+:vpi_module "/usr/local/lib/ivl/vhdl_textio.vpi";
+:vpi_module "/usr/local/lib/ivl/v2005_math.vpi";
+:vpi_module "/usr/local/lib/ivl/va_math.vpi";
+:vpi_module "/usr/local/lib/ivl/v2009.vpi";
+S_0x5640ec808f60 .scope package, "$unit" "$unit" 2 1;
+ .timescale -9 -12;
+S_0x5640ec7f6fd0 .scope module, "dff" "dff" 3 25;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 1 "d";
+    .port_info 1 /INPUT 1 "clk";
+    .port_info 2 /INPUT 1 "rst";
+    .port_info 3 /OUTPUT 1 "q";
+o0x7f24fa5ba018 .functor BUFZ 1, C4<z>; HiZ drive
+v0x5640ec8090f0_0 .net "clk", 0 0, o0x7f24fa5ba018;  0 drivers
+o0x7f24fa5ba048 .functor BUFZ 1, C4<z>; HiZ drive
+v0x5640ec808ec0_0 .net "d", 0 0, o0x7f24fa5ba048;  0 drivers
+v0x5640ec83ec20_0 .var "q", 0 0;
+o0x7f24fa5ba0a8 .functor BUFZ 1, C4<z>; HiZ drive
+v0x5640ec83ecf0_0 .net "rst", 0 0, o0x7f24fa5ba0a8;  0 drivers
+E_0x5640ec7f7540 .event posedge, v0x5640ec8090f0_0;
+E_0x5640ec82f370 .event edge, v0x5640ec83ecf0_0;
+    .scope S_0x5640ec7f6fd0;
+T_0 ;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x5640ec83ec20_0, 0, 1;
+    %end;
+    .thread T_0, $init;
+    .scope S_0x5640ec7f6fd0;
+T_1 ;
+    %wait E_0x5640ec82f370;
+    %pushi/vec4 0, 0, 1;
+    %assign/vec4 v0x5640ec83ec20_0, 0;
+    %jmp T_1;
+    .thread T_1, $push;
+    .scope S_0x5640ec7f6fd0;
+T_2 ;
+    %wait E_0x5640ec7f7540;
+    %load/vec4 v0x5640ec808ec0_0;
+    %assign/vec4 v0x5640ec83ec20_0, 0;
+    %jmp T_2;
+    .thread T_2;
+    .scope S_0x5640ec7f6fd0;
+T_3 ;
+    %vpi_call/w 3 41 "$dumpfile", "waveform.vcd" {0 0 0};
+    %vpi_call/w 3 42 "$dumpvars", 32'sb00000000000000000000000000000000, S_0x5640ec7f6fd0 {0 0 0};
+    %delay 1000, 0;
+    %end;
+    .thread T_3;
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    "-";
+    "/home/ashwin/Testbox/cocotb/and_test/module.v";
